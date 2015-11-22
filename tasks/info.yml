@@ -1,0 +1,10 @@
+---
+- set_fact: outer_loop='{{ item }}'
+- name: Print VPC details
+  debug: msg='{{ outer_loop.subnets }}'
+- name: Find subnet
+  debug: msg='{{ outer_loop.subnets | selectattr("cidr", "equalto", "172.16.5.0/24") | list }}'
+- set_fact: subnet='{{ outer_loop.subnets | selectattr("cidr", "equalto", "172.16.5.0/24") | first }}'
+- name: Print subnet id
+  debug: msg='{{ subnet.id }}'
+  

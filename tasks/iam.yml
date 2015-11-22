@@ -1,0 +1,14 @@
+- name: Configure IAM Roles
+  iam:
+    iam_type: role
+    name: '{{ item.name }}'
+    state: '{{ item.state | default("present") }}'
+  with_items: iam_roles
+- name: Configure IAM Policies
+  iam_policy:
+    iam_type: role
+    iam_name: '{{ item.name }}'
+    policy_name: '{{ item.policy_name }}'
+    policy_document: '{{ item.policy_document }}'
+    state: '{{ item.state | default("present") }}'
+  with_items: iam_roles

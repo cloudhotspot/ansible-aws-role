@@ -1,0 +1,11 @@
+- name: Create VPCs
+  ec2_vpc: 
+    state: '{{ item.state | default("present") }}'
+    region: '{{ item.region }}'
+    cidr_block: '{{ item.cidr_block }}'
+    resource_tags: '{{ item.resource_tags | default(omit) }}'
+    subnets: '{{ item.subnets | default(omit) }}'
+    internet_gateway: '{{ item.internet_gateway | default(True) }}'
+    route_tables: '{{ item.route_tables | default(omit) }}'
+  with_items: vpcs
+  register: vpcs_result

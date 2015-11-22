@@ -1,0 +1,11 @@
+security_groups:
+  - name: TodobackendAppSG
+    description: Todobackend Application Security Group
+    target_vpc_tags:
+      - Environment: Production
+    region: '{{ aws_region }}'
+    rules:
+      - proto: tcp
+        from_port: 8000
+        to_port: 8000
+        cidr_ip: 0.0.0.0/0

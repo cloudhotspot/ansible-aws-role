@@ -1,0 +1,9 @@
+iam_roles:
+  - name: ecsInstanceRoleTest
+    policy_name: EC2ContainerServiceforEC2Role
+    policy_document: templates/ecs_instance_role.json.j2
+    state: present
+  - name: ecsServiceRoleTest
+    policy_name: EC2ContainerServiceforEC2Role
+    policy_document: templates/ecs_service_role.json.j2
+    state: present

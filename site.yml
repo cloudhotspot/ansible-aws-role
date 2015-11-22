@@ -1,0 +1,16 @@
+- name: Test Playbook
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    aws_region: us-west-2
+  vars_files:
+    - vars/vpc.yml
+    - vars/iam.yml
+    - vars/ecs.yml
+  tasks: 
+    - include: tasks/vpc.yml
+    - include: tasks/info.yml
+      with_items: vpcs_result.results
+    # - include: tasks/iam.yml
+    # - include: tasks/ecs.yml

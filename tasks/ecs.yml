@@ -1,0 +1,6 @@
+---
+- name: Create ECS clusters
+  ecs_cluster:
+    name: '{{ item.name }}'
+    state: '{{ item.state | default("present") }}'
+  with_items: ecs_clusters

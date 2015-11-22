@@ -1,0 +1,9 @@
+---
+ecs_clusters:
+  - name: todobackend-production-ecs-cluster
+    state: present
+  - name: todobackend-staging-ecs-cluster
+    state: present
+
+ecs_hosts:
+  

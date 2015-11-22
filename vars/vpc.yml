@@ -1,0 +1,73 @@
+vpcs:
+  - state: present
+    region: us-west-2
+    cidr_block: 172.16.0.0/19
+    resource_tags: >
+      { 
+        "Name":"Production", 
+        "Environment":"Production" 
+      }
+    subnets:
+      - cidr: 172.16.0.0/24
+        az: us-west-2a
+        resource_tags: { "Name":"Production Front End a", "Environment":"Production", "Tier": "Front End" }
+      - cidr: 172.16.1.0/24
+        az: us-west-2b
+        resource_tags: { "Name":"Production Front End b", "Environment":"Production", "Tier": "Front End" }
+      - cidr: 172.16.2.0/24
+        az: us-west-2a
+        resource_tags: { "Name":"Production Web a", "Environment":"Production", "Tier": "Web" }
+      - cidr: 172.16.3.0/24
+        az: us-west-2b
+        resource_tags: { "Name":"Production Web b", "Environment":"Production", "Tier": "Web" }
+      - cidr: 172.16.4.0/24
+        az: us-west-2a
+        resource_tags: { "Name":"Production Database a", "Environment":"Production", "Tier": "Database" }
+      - cidr: 172.16.5.0/24
+        az: us-west-2b
+        resource_tags: { "Name":"Production Database b", "Environment":"Production", "Tier": "Database" }
+    internet_gateway: True
+    route_tables:
+      - subnets:
+          - 172.16.0.0/24
+          - 172.16.1.0/24
+        routes:
+          - dest: 0.0.0.0/0
+            gw: igw
+        resource_tags: { "Name": "Production Public Route Table" }
+  # - state: present
+  #   region: us-west-2
+  #   cidr_block: 172.16.32.0/19
+  #   resource_tags: >
+  #     { 
+  #       "Name":"Staging", 
+  #       "Environment":"Staging" 
+  #     }
+  #   subnets:
+  #     - cidr: 172.16.32.0/24
+  #       az: us-west-2a
+  #       resource_tags: { "Name":"Staging Front End a", "Environment":"Staging", "Tier": "Front End" }
+  #     - cidr: 172.16.33.0/24
+  #       az: us-west-2b
+  #       resource_tags: { "Name":"Staging Front End b", "Environment":"Staging", "Tier": "Front End" }
+  #     - cidr: 172.16.34.0/24
+  #       az: us-west-2a
+  #       resource_tags: { "Name":"Staging Web a", "Environment":"Staging", "Tier": "Web" }
+  #     - cidr: 172.16.35.0/24
+  #       az: us-west-2b
+  #       resource_tags: { "Name":"Staging Web b", "Environment":"Staging", "Tier": "Web" }
+  #     - cidr: 172.16.36.0/24
+  #       az: us-west-2a
+  #       resource_tags: { "Name":"Staging Database a", "Environment":"Staging", "Tier": "Database" }
+  #     - cidr: 172.16.37.0/24
+  #       az: us-west-2b
+  #       resource_tags: { "Name":"Staging Database b", "Environment":"Staging", "Tier": "Database" }
+  #   internet_gateway: True
+  #   route_tables:
+  #     - subnets:
+  #         - 172.16.32.0/24
+  #         - 172.16.33.0/24
+  #       routes:
+  #         - dest: 0.0.0.0/0
+  #           gw: igw
+  #       resource_tags: { "Name": "Staging Public Route Table" }
